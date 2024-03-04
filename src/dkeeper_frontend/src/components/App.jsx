@@ -3,7 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
-import { dkeeper_backend } from "../../../declarations/dkeeper_backend"
+import { dkeeper_backend } from "../../../declarations/dkeeper_backend";
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -11,6 +11,7 @@ function App() {
   function addNote(newNote) {
     //console.log(note);
     setNotes(prevNotes => {
+      dkeeper_backend.createNote(newNote.title, newNote.content);
       return [...prevNotes, newNote];
     });
    }
