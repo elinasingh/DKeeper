@@ -28,6 +28,9 @@ function App() {
    }
 
    function deleteNote(id) {
+    // delete from BE
+    dkeeper_backend.removeNote(id);
+    // update the FE
     //console.log("Delete was triggered");
     setNotes((prevNotes) => {
       return prevNotes.filter((noteItem, index) => {
