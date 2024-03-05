@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
@@ -12,8 +12,19 @@ function App() {
     //console.log(note);
     setNotes(prevNotes => {
       dkeeper_backend.createNote(newNote.title, newNote.content);
-      return [...prevNotes, newNote];
+      return [newNote, ...prevNotes];
     });
+   }
+
+   useEffect(() => {
+    console.log("useEffect is triggered");
+    fetchData();
+   }, []);
+
+   async function fetchData() {
+    const notesArray = await dkeeper_backend.readNotes();
+    console.log("Fetched notes!");
+    setNotes(notesArray);
    }
 
    function deleteNote(id) {
